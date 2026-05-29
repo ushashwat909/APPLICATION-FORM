@@ -1,0 +1,924 @@
+/* ========================================
+   DESIGN SYSTEM & CUSTOM PROPERTIES
+   ======================================== */
+:root {
+    /* Color Palette */
+    --bg-primary: #0a0a1a;
+    --bg-secondary: #10102a;
+    --bg-card: rgba(17, 17, 45, 0.75);
+    --bg-card-border: rgba(99, 102, 241, 0.15);
+    --bg-input: rgba(15, 15, 40, 0.6);
+    --bg-input-focus: rgba(20, 20, 55, 0.8);
+
+    --text-primary: #f1f1f6;
+    --text-secondary: #9594b0;
+    --text-muted: #5d5c78;
+    --text-placeholder: #4a4968;
+
+    --accent-primary: #6366f1;
+    --accent-secondary: #a855f7;
+    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    --accent-glow: rgba(99, 102, 241, 0.25);
+
+    --success: #22c55e;
+    --success-bg: rgba(34, 197, 94, 0.08);
+    --success-border: rgba(34, 197, 94, 0.3);
+    --success-glow: rgba(34, 197, 94, 0.15);
+
+    --error: #ef4444;
+    --error-bg: rgba(239, 68, 68, 0.06);
+    --error-border: rgba(239, 68, 68, 0.4);
+    --error-glow: rgba(239, 68, 68, 0.12);
+
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-xs: 0.7rem;
+    --font-size-sm: 0.8rem;
+    --font-size-base: 0.95rem;
+    --font-size-lg: 1.15rem;
+    --font-size-xl: 1.6rem;
+    --font-size-2xl: 2rem;
+
+    /* Borders & Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+    --border-input: 1.5px solid rgba(99, 102, 241, 0.12);
+    --border-input-focus: 1.5px solid var(--accent-primary);
+    --border-input-error: 1.5px solid var(--error);
+    --border-input-success: 1.5px solid var(--success);
+
+    /* Shadows */
+    --shadow-card: 0 8px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(99, 102, 241, 0.06);
+    --shadow-input-focus: 0 0 0 3px var(--accent-glow), 0 4px 20px rgba(99, 102, 241, 0.1);
+    --shadow-input-error: 0 0 0 3px var(--error-glow), 0 4px 20px rgba(239, 68, 68, 0.08);
+    --shadow-input-success: 0 0 0 3px var(--success-glow);
+    --shadow-button: 0 4px 24px rgba(99, 102, 241, 0.35);
+    --shadow-button-hover: 0 8px 40px rgba(99, 102, 241, 0.5);
+
+    /* Transitions */
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+
+/* ========================================
+   ANIMATED BACKGROUND
+   ======================================== */
+.bg-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    animation: orbFloat 20s ease-in-out infinite;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+    top: -15%;
+    left: -10%;
+    animation-duration: 22s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+    top: 50%;
+    right: -8%;
+    animation-duration: 18s;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+    bottom: -10%;
+    left: 30%;
+    animation-duration: 25s;
+    animation-delay: -10s;
+}
+
+.orb-4 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+    top: 20%;
+    right: 30%;
+    animation-duration: 20s;
+    animation-delay: -7s;
+    opacity: 0.2;
+}
+
+@keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(60px, -40px) scale(1.1); }
+    50% { transform: translate(-30px, 50px) scale(0.9); }
+    75% { transform: translate(40px, 20px) scale(1.05); }
+}
+
+#particles-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* ========================================
+   FORM WRAPPER & CARD
+   ======================================== */
+.form-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 520px;
+    padding: var(--space-lg);
+    animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+        filter: blur(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.form-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--bg-card-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl) var(--space-xl);
+    backdrop-filter: blur(40px) saturate(1.5);
+    -webkit-backdrop-filter: blur(40px) saturate(1.5);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+}
+
+/* Decorative accent line at top */
+.card-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+/* Subtle inner shimmer effect */
+.form-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(99, 102, 241, 0.03) 60deg, transparent 120deg);
+    animation: shimmerRotate 15s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmerRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+/* ========================================
+   FORM HEADER
+   ======================================== */
+.form-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.logo-icon {
+    display: inline-flex;
+    margin-bottom: var(--space-md);
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.3)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 16px rgba(99, 102, 241, 0.5)); }
+}
+
+.form-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+}
+
+.form-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+
+/* ========================================
+   FORM GROUPS & INPUTS
+   ======================================== */
+.application-form {
+    position: relative;
+    z-index: 1;
+}
+
+.form-group {
+    margin-bottom: var(--space-lg);
+    animation: fieldSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fieldSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    z-index: 2;
+    transition: color var(--transition-base), transform var(--transition-spring);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.textarea-icon {
+    top: 20px;
+    transform: none;
+}
+
+/* Inputs & Textarea */
+input,
+textarea {
+    width: 100%;
+    background: var(--bg-input);
+    border: var(--border-input);
+    border-radius: var(--radius-md);
+    padding: 18px 44px 8px 48px;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    outline: none;
+    transition:
+        border-color var(--transition-base),
+        background var(--transition-base),
+        box-shadow var(--transition-base),
+        transform var(--transition-fast);
+    position: relative;
+    z-index: 1;
+}
+
+textarea {
+    padding-top: 26px;
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.6;
+}
+
+/* Floating Label */
+.floating-label {
+    position: absolute;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-base);
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: all var(--transition-base);
+    z-index: 3;
+    font-weight: 500;
+}
+
+.textarea-wrapper .floating-label {
+    top: 20px;
+    transform: none;
+}
+
+/* Float label up on focus or filled */
+input:focus ~ .floating-label,
+input:not(:placeholder-shown) ~ .floating-label,
+textarea:focus ~ .floating-label,
+textarea:not(:placeholder-shown) ~ .floating-label {
+    top: 8px;
+    transform: none;
+    font-size: var(--font-size-xs);
+    color: var(--accent-primary);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Placeholder hint (shown when focused + empty) */
+.placeholder-hint {
+    position: absolute;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-base);
+    color: var(--text-placeholder);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: 2;
+    padding-top: 10px;
+}
+
+.textarea-hint {
+    top: 26px;
+    transform: none;
+}
+
+input:focus:placeholder-shown ~ .placeholder-hint,
+textarea:focus:placeholder-shown ~ .placeholder-hint {
+    opacity: 1;
+}
+
+/* Animated bottom border effect */
+.input-border-effect {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    transition: width var(--transition-slow), left var(--transition-slow);
+    z-index: 3;
+}
+
+input:focus ~ .input-border-effect,
+textarea:focus ~ .input-border-effect {
+    width: 100%;
+    left: 0;
+}
+
+/* Focus state */
+input:focus,
+textarea:focus {
+    background: var(--bg-input-focus);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-input-focus);
+}
+
+input:focus ~ .input-icon,
+textarea:focus ~ .input-icon {
+    color: var(--accent-primary);
+    transform: translateY(-50%) scale(1.1);
+}
+
+textarea:focus ~ .textarea-icon {
+    transform: scale(1.1);
+}
+
+/* Valid indicator */
+.valid-indicator {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    opacity: 0;
+    transition: all var(--transition-spring);
+    z-index: 3;
+    display: flex;
+}
+
+.textarea-valid {
+    top: 20px;
+    transform: scale(0);
+}
+
+
+/* ========================================
+   VALIDATION STATES
+   ======================================== */
+/* Error state */
+.form-group.error input,
+.form-group.error textarea {
+    border-color: var(--error);
+    background: var(--error-bg);
+    box-shadow: var(--shadow-input-error);
+    animation: inputShake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.form-group.error .input-icon {
+    color: var(--error);
+}
+
+.form-group.error .floating-label {
+    color: var(--error) !important;
+}
+
+.form-group.error .input-border-effect {
+    background: var(--error);
+    width: 100%;
+    left: 0;
+}
+
+@keyframes inputShake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-6px); }
+    20% { transform: translateX(5px); }
+    30% { transform: translateX(-4px); }
+    40% { transform: translateX(3px); }
+    50% { transform: translateX(-2px); }
+    60% { transform: translateX(1px); }
+}
+
+.error-message {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--error);
+    margin-top: 6px;
+    padding-left: 48px;
+    min-height: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all var(--transition-base);
+    font-weight: 500;
+}
+
+.form-group.error .error-message {
+    min-height: 18px;
+    max-height: 40px;
+    opacity: 1;
+}
+
+/* Success / valid state */
+.form-group.valid input,
+.form-group.valid textarea {
+    border-color: var(--success);
+    background: var(--success-bg);
+}
+
+.form-group.valid .input-icon {
+    color: var(--success);
+}
+
+.form-group.valid .floating-label {
+    color: var(--success) !important;
+}
+
+.form-group.valid .input-border-effect {
+    background: var(--success);
+    width: 100%;
+    left: 0;
+}
+
+.form-group.valid .valid-indicator {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+}
+
+.form-group.valid .textarea-valid {
+    transform: scale(1);
+}
+
+/* Character counter */
+.char-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    z-index: 3;
+    font-variant-numeric: tabular-nums;
+    transition: color var(--transition-base);
+}
+
+.char-counter.warning {
+    color: #f59e0b;
+}
+
+.char-counter.danger {
+    color: var(--error);
+}
+
+
+/* ========================================
+   SUBMIT BUTTON
+   ======================================== */
+.submit-btn {
+    width: 100%;
+    position: relative;
+    padding: 16px 32px;
+    background: var(--accent-gradient);
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-button);
+    margin-top: var(--space-sm);
+    animation: fieldSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button-hover);
+}
+
+.submit-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    transition: all var(--transition-base);
+}
+
+.btn-arrow {
+    transition: transform var(--transition-base);
+}
+
+.submit-btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.btn-loader {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+}
+
+.submit-btn.loading .btn-content {
+    display: none;
+}
+
+.submit-btn.loading .btn-loader {
+    display: flex;
+}
+
+.submit-btn.loading {
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Ripple effect */
+.btn-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: none;
+    pointer-events: none;
+}
+
+.btn-ripple.active {
+    animation: rippleEffect 0.6s ease-out;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Shimmer overlay on button */
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    transition: left 0.6s ease;
+}
+
+.submit-btn:hover::after {
+    left: 100%;
+}
+
+
+/* ========================================
+   SUCCESS MESSAGE
+   ======================================== */
+.success-message {
+    display: none;
+    text-align: center;
+    padding: var(--space-xl) var(--space-md);
+    position: relative;
+    z-index: 1;
+}
+
+.success-message.show {
+    display: block;
+    animation: successEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes successEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.success-icon-wrapper {
+    margin-bottom: var(--space-lg);
+    display: inline-flex;
+    position: relative;
+}
+
+.success-icon-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background: var(--success-glow);
+    animation: successPulse 2s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.2; }
+}
+
+.success-circle {
+    stroke-dasharray: 138;
+    stroke-dashoffset: 138;
+    animation: drawCircle 0.8s ease-out 0.2s forwards;
+}
+
+.success-check {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: drawCheck 0.4s ease-out 0.8s forwards;
+}
+
+@keyframes drawCircle {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+}
+
+.success-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--success);
+    margin-bottom: var(--space-sm);
+}
+
+.success-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+}
+
+.btn-new-application {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 12px 28px;
+    background: transparent;
+    border: 1.5px solid var(--success-border);
+    border-radius: var(--radius-md);
+    color: var(--success);
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.btn-new-application:hover {
+    background: var(--success-bg);
+    border-color: var(--success);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px var(--success-glow);
+}
+
+
+/* ========================================
+   FORM FOOTER
+   ======================================== */
+.form-footer {
+    text-align: center;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(99, 102, 241, 0.08);
+    position: relative;
+    z-index: 1;
+    animation: fieldSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.form-footer p {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+}
+
+.security-badges {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(99, 102, 241, 0.08);
+    transition: all var(--transition-base);
+}
+
+.badge:hover {
+    border-color: rgba(99, 102, 241, 0.2);
+    color: var(--text-secondary);
+    background: rgba(99, 102, 241, 0.08);
+}
+
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 600px) {
+    .form-wrapper {
+        padding: var(--space-md);
+    }
+
+    .form-card {
+        padding: var(--space-xl) var(--space-lg);
+        border-radius: var(--radius-lg);
+    }
+
+    .form-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .form-subtitle {
+        font-size: var(--font-size-xs);
+    }
+
+    input,
+    textarea {
+        font-size: 16px; /* Prevents iOS zoom */
+    }
+
+    .orb-1 { width: 300px; height: 300px; }
+    .orb-2 { width: 250px; height: 250px; }
+    .orb-3 { width: 200px; height: 200px; }
+    .orb-4 { display: none; }
+}
+
+@media (max-width: 380px) {
+    .form-card {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .security-badges {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ========================================
+   FOCUS-VISIBLE FOR KEYBOARD NAVIGATION
+   ======================================== */
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}

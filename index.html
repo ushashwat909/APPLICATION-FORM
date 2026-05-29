@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Job Application Form — Submit your application with ease.">
+    <title>Apply Now — Job Application Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated background orbs -->
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
+    <!-- Floating particles canvas -->
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+    <main class="form-wrapper">
+        <div class="form-card">
+            <!-- Decorative top accent -->
+            <div class="card-accent"></div>
+
+            <!-- Header -->
+            <header class="form-header">
+                <div class="logo-icon" aria-hidden="true">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366f1"/>
+                                <stop offset="100%" style="stop-color:#a855f7"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
+                        <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1 class="form-title">Apply Now</h1>
+                <p class="form-subtitle">We'd love to hear from you. Fill out the form below and let's start a conversation.</p>
+            </header>
+
+            <!-- Success Message (hidden by default) -->
+            <div id="success-message" class="success-message" role="alert">
+                <div class="success-icon-wrapper">
+                    <svg class="success-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="22" stroke="#22c55e" stroke-width="3" class="success-circle"/>
+                        <path d="M14 24L21 31L34 17" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="success-check"/>
+                    </svg>
+                </div>
+                <h2 class="success-title">Application Submitted!</h2>
+                <p class="success-text">Thank you for reaching out. We'll review your application and get back to you shortly.</p>
+                <button type="button" id="new-application-btn" class="btn-new-application">Submit Another</button>
+            </div>
+
+            <!-- Form -->
+            <form id="application-form" class="application-form" novalidate>
+                <!-- Name Field -->
+                <div class="form-group" id="name-group">
+                    <div class="input-wrapper">
+                        <div class="input-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <input type="text" id="name-input" name="name" placeholder=" " autocomplete="name" required>
+                        <label for="name-input" class="floating-label">Full Name</label>
+                        <span class="placeholder-hint">John Doe</span>
+                        <div class="input-border-effect"></div>
+                        <div class="valid-indicator" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12L10 17L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="error-message" id="name-error" role="alert"></span>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group" id="email-group">
+                    <div class="input-wrapper">
+                        <div class="input-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M22 7L13.03 12.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                            </svg>
+                        </div>
+                        <input type="email" id="email-input" name="email" placeholder=" " autocomplete="email" required>
+                        <label for="email-input" class="floating-label">Email Address</label>
+                        <span class="placeholder-hint">john@example.com</span>
+                        <div class="input-border-effect"></div>
+                        <div class="valid-indicator" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12L10 17L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="error-message" id="email-error" role="alert"></span>
+                </div>
+
+                <!-- Phone Field -->
+                <div class="form-group" id="phone-group">
+                    <div class="input-wrapper">
+                        <div class="input-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <input type="tel" id="phone-input" name="phone" placeholder=" " autocomplete="tel" required>
+                        <label for="phone-input" class="floating-label">Phone Number</label>
+                        <span class="placeholder-hint">(123) 456-7890</span>
+                        <div class="input-border-effect"></div>
+                        <div class="valid-indicator" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12L10 17L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="error-message" id="phone-error" role="alert"></span>
+                </div>
+
+                <!-- Message Field -->
+                <div class="form-group" id="message-group">
+                    <div class="input-wrapper textarea-wrapper">
+                        <div class="input-icon textarea-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <textarea id="message-input" name="message" rows="4" placeholder=" " required></textarea>
+                        <label for="message-input" class="floating-label">Your Message</label>
+                        <span class="placeholder-hint textarea-hint">Tell us about yourself or your project...</span>
+                        <div class="input-border-effect"></div>
+                        <div class="valid-indicator textarea-valid" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12L10 17L19 7"/>
+                            </svg>
+                        </div>
+                        <div class="char-counter" id="char-counter">0 / 500</div>
+                    </div>
+                    <span class="error-message" id="message-error" role="alert"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submit-btn" class="submit-btn">
+                    <span class="btn-content">
+                        <span class="btn-text">Submit Application</span>
+                        <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                    <span class="btn-loader" aria-hidden="true">
+                        <span class="spinner"></span>
+                        <span>Processing...</span>
+                    </span>
+                    <div class="btn-ripple"></div>
+                </button>
+            </form>
+
+            <!-- Footer -->
+            <footer class="form-footer">
+                <p>Your information is secure and will never be shared.</p>
+                <div class="security-badges">
+                    <span class="badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        SSL Encrypted
+                    </span>
+                    <span class="badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        GDPR Compliant
+                    </span>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
